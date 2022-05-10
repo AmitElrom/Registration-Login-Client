@@ -1,6 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+// form managing hooks
+import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
+
+const shema = yup.object().shape({
+    email : yup.string().email().required(),
+    password : yup.string().required() 
+})
+ 
+
 const Login = () => {
   return (
     <div style={{ textAlign : 'center', border : '.3em solid black', padding : '1em', width : 'fit-content', margin : 'auto' }}>
