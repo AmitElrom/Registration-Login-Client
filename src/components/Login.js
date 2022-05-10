@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 // form managing hooks
 import { useForm } from 'react-hook-form'
@@ -14,12 +15,17 @@ const schema = yup.object().shape({
  
 const Login = () => {
 
+    const navigate = useNavigate()
+
     const { register, handleSubmit, setValue, formState : { errors } } = useForm({
         resolver : yupResolver(schema)
     })
 
-    const submitForm = (data) => {
+    const submitForm = async (obj) => {
+        const { data } = await axios.post("http://localhost:8000/login", obj)
         console.log(data);
+
+        navigate('/home')
     }
 
     return (
